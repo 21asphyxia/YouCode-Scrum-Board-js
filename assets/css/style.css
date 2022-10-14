@@ -8,3 +8,20 @@
     background-size: 360px;
     background-position: right bottom;
 }
+
+.rounded-xl{
+    border-radius: 8px;
+}
+h4{
+    margin: 0;
+}
+
+#header{
+    background: #0060cc;}
+
+#header > div.navbar-header > a > small
+{
+    font-size: 10px;
+    font-weight: 700;
+    margin-top: -20px;
+}
