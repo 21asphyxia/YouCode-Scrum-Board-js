@@ -9,13 +9,51 @@
  let bug = document.getElementById("bug");
  let priority = document.getElementById("priority");
  let taskStatus = document.getElementById("status");
+ let date = document.getElementById("date");
  let description = document.getElementById("description");
- let tasks = document.getElementById(taskStatus);
+ let taskss = document.getElementById(taskStatus);
  let add = document.getElementById("save-button");
 
+form.addEventListener("submit",(e) => {
+    e.preventDefault();
+    formValidation();
+});
+
+let formValidation = () => {
+    if (title.value === "") {
+      console.log("failure");
+      msg.innerHTML = "Task cannot be blank";
+    } else {
+      console.log("success");
+      msg.innerHTML = "";
+
+      acceptData();
+      add.setAttribute("data-bs-dismiss", "modal");
+      add.click();
+    }
+};
+
+let data =[];
+let acceptData = () => {
+    let taskType=null;
+    if (feature.checked){taskType="Feature";}
+    else {taskType="Bug"}
+    data.push({
+        'title': title.value,
+        'type': taskType,
+        'priority':priority.value,   
+        'status':   taskStatus.value,
+        'date':   date.value,
+        'description': description.value,
+    });
+    localStorage.setItem("data",JSON.stringify(data));
+
+    console.log(data);
+
+};
 
 function readData(){
-    let data ={};
+    
     data
 }
 
