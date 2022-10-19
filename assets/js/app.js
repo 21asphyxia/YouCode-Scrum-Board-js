@@ -18,6 +18,9 @@ let done = document.getElementById("done-tasks");
 let taskss = document.getElementById(taskStatus);
 let add = document.getElementById("save-button");
 
+
+reloadTasks();
+
 function createTask() {
   // initialiser task form
   initTaskForm();
@@ -28,8 +31,7 @@ function createTask() {
   $(document).ready(function () {
     $("#form").modal("show");
   });
-
-  document.getElementsByClassName()
+  
 }
 
 function saveTask() {
@@ -61,8 +63,7 @@ function saveTask() {
         date: date.value,
         description: description.value,
         });
-        localStorage.setItem("hamid", JSON.stringify(tasks));
-
+        l
         console.log(tasks);
     };
 
@@ -86,38 +87,90 @@ function saveTask() {
   reloadTasks();
 }
 
+let ind;
+
 function editTask(index) {
   // Initialisez task form
   initTaskForm();
   // Affichez updates
-
+  document.getElementById("update-button").classList.remove("d-none");
   // Delete Button
-
+  document.getElementById("delete-button").classList.remove("d-none");
   // Définir l’index en entrée cachée pour l’utiliser en Update et Delete
-
+  ind=index;
   // Definir FORM INPUTS
+  let taskStatusValue;
+  if (tasks[index].status == "To Do") {
+    taskStatusValue = "to-do-tasks";
+    } else if (tasks[index].status == "In Progress") {
+    taskStatusValue = "in-progress-tasks";
+    } else if (tasks[index].status == "Done") {
+    taskStatusValue = "done-tasks";
+    }
 
+     
+  title.value = tasks[index].title;
+  priority.value = tasks[index].priority;
+  taskStatus.value = taskStatusValue;
+  description.value = tasks[index].description;
+  if (tasks[index].type == "Bug"){bug.checked=true}
+  console.log(bug);
+  date.value = tasks[index].date;
   // Ouvrir Modal form
+  $(document).ready(function () {
+    $("#form").modal("show");
+  });
+  console.log(ind);
 }
 
 function updateTask() {
   // GET TASK ATTRIBUTES FROM INPUTS
+  let taskType = null,
+  taskStatusValue = null;
+  if (taskStatus.value == "to-do-tasks") {
+  taskStatusValue = "To Do";
+  } else if (taskStatus.value == "in-progress-tasks") {
+  taskStatusValue = "In Progress";
+  } else if (taskStatus.value == "done-tasks") {
+  taskStatusValue = "Done";
+  }
+
+  if (feature.checked) {
+  taskType = "Feature";
+  } else {
+  taskType = "Bug";
+  }
   // Créez task object
+  let data={
+    'title': title.value,
+    'type': taskType,
+    'priority': priority.value,
+    'status': taskStatusValue,
+    'date': date.value,
+    'description': description.value,
+  }
+  console.log(data);
   // Remplacer ancienne task par nouvelle task
+  tasks[ind] = data;
   // Fermer Modal form
+  document.getElementById("close-button").click();
   // Refresh tasks
+  reloadTasks();
 }
 
 function deleteTask() {
   // Get index of task in the array
   // Remove task from array by index splice function
+  tasks.splice(ind,1);
   // close modal form
+  document.getElementById("close-button").click();
   // refresh tasks
+  reloadTasks();
 }
 
 function initTaskForm() {
   // Clear task form from data
-
+  form.reset();
   // Hide all action buttons
 
   add.classList.add("d-none");
@@ -141,12 +194,8 @@ function reloadTasks() {
     doneCount = 0,
     taskCount = 0;
   tasks.forEach((element) => {
-    // if (element['status'] == "To Do"){
-    //     toDo.innerHTML += ;}
-
     let icon;
     
-
     if (element["status"] == "To Do") {
       taskCount++;
       toDoCount++;
@@ -165,9 +214,10 @@ function reloadTasks() {
       document.getElementById("to-do-tasks-count").innerHTML = `${doneCount}`;
       icon = "bi bi-check2-circle text-success fs-3";
     }
-
-    document.querySelector('[value="' + element['status'] + '"]').innerHTML += `
-        <button class="row list-group-item-action mx-0 border">
+    
+    document.querySelector('[value="' + element['status'] + '"]').innerHTML += 
+        `
+        <button id="task${taskCount}" class="row list-group-item-action mx-0 border" onclick="editTask(${taskCount-1})">
 								<div class="col-1 m-auto">
 									<i class="${icon}"></i> 
 								</div>
@@ -178,8 +228,8 @@ function reloadTasks() {
 										<div class="" title="${element['description']}">${element['description']}</div>
 									</div>
 									<div class="mt-1 mb-2">
-										<span class="btn-primary px-2 py-1 rounded fw-bolder" style="font-size:0.6rem">High</span>
-										<span class="bg-light-600 rounded fw-bolder px-2 py-1" style="font-size:0.6rem">Feature</span>
+										<span class="btn-primary px-2 py-1 rounded fw-bolder" style="font-size:0.6rem">${element['priority']}</span>
+										<span class="bg-light-600 rounded fw-bolder px-2 py-1" style="font-size:0.6rem">${element['type']}</span>
 									</div>
 								</div>
 							</button>
