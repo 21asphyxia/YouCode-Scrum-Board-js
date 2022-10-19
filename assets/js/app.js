@@ -63,7 +63,6 @@ function saveTask() {
         date: date.value,
         description: description.value,
         });
-        l
         console.log(tasks);
     };
 
@@ -199,22 +198,23 @@ function reloadTasks() {
     if (element["status"] == "To Do") {
       taskCount++;
       toDoCount++;
-      document.getElementById("to-do-tasks-count").innerHTML = `${toDoCount}`;
       icon = "bi bi-question-circle text-success fs-4";
     } else if (element["status"] == "In Progress") {
       taskCount++;
       inProgressCount++;
-      document.getElementById(
-        "to-do-tasks-count"
-      ).innerHTML = `${inProgressCount}`;
+      
       icon = "spinner-border spinner-border-sm text-success";
     } else if (element["status"] == "Done") {
       taskCount++;
       doneCount++;
-      document.getElementById("to-do-tasks-count").innerHTML = `${doneCount}`;
+      
       icon = "bi bi-check2-circle text-success fs-3";
     }
     
+    document.getElementById("done-tasks-count").innerHTML = `${doneCount}`;
+    document.getElementById("in-progress-tasks-count").innerHTML = `${inProgressCount}`;
+    document.getElementById("to-do-tasks-count").innerHTML = `${toDoCount}`;
+
     document.querySelector('[value="' + element['status'] + '"]').innerHTML += 
         `
         <button id="task${taskCount}" class="row list-group-item-action mx-0 border" onclick="editTask(${taskCount-1})">
