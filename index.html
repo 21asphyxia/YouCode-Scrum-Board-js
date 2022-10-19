@@ -23,7 +23,7 @@
 		<div id="header" class="app-header app-header-inverse">
 						<!-- BEGIN navbar-header -->
 						<div class="navbar-header">
-							<a href="/home" class="navbar-brand">
+							<a href="https://youcode.ma/" class="navbar-brand">
 								<img src="assets/img/logo-white.png"> 
 								<small >APPRENANT</small>
 							</a>
@@ -33,7 +33,7 @@
 									<i class="fa fa-bell text-white"></i>
 							</div>
 							<div class="navbar-item navbar-user ">
-								<a href="#" class="navbar-link dropdown-toggle d-flex align-items-center">
+								<a href="https://github.com/21asphyxia/YouCode-Scrum-Board" class="navbar-link dropdown-toggle d-flex align-items-center">
 									<img src="assets/img/334-1662714630.jpg" alt="" class="rounded"> 
 									<span class="d-none d-md-inline text-white">Mouad El Amraoui</span>
 								</a>
@@ -117,7 +117,7 @@
 				<div class="modal-body">
 					<div class="mb-3">
 						<label for="taskTitle" class="col-form-label">Title</label>
-						<input type="text" class="form-control" id="taskTitle">
+						<input type="text" class="form-control" onkeyup="enableADD()" onCut="return false" id="taskTitle">
 						<div id="msg"></div>
 					</div>
 					<div class="mb-3">
@@ -162,7 +162,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-light text-black border" data-bs-dismiss="modal" id="cancel-button">Cancel</button>
 					<button type="button" onclick="deleteTask()" class="btn btn-outline-danger border" id="delete-button">Delete</button>
-					<button type="button" onclick="saveTask()" id="save-button" class="btn btn-primary">Save</button>
+					<button type="button" onclick="saveTask()" id="save-button" class="btn btn-primary" disabled>Save</button>
 					<button type="button" onclick="updateTask()" class="btn btn-primary" id="update-button">Update</button>
 				</div>
 			</div>

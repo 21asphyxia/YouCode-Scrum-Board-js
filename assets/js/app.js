@@ -18,7 +18,18 @@ let done = document.getElementById("done-tasks");
 let taskss = document.getElementById(taskStatus);
 let add = document.getElementById("save-button");
 
+// disable save button on empty title
+let enableADD = () => {
+  if (title.value === "") {
+    add.disabled=true;
+    document.getElementById("update-button").disabled=true;}
+    else{
+  add.disabled = false;
+  document.getElementById("update-button").disabled=false;
+  }
+};
 
+// load tasks on website launch
 reloadTasks();
 
 function createTask() {
@@ -70,10 +81,9 @@ function saveTask() {
     let formValidation = () => {
         if (title.value === "") {
         console.log("failure");
-        msg.innerHTML = "Task cannot be blank";
         } else {
         console.log("success");
-        msg.innerHTML = "";
+        add.removeAttribute("disabled")
         acceptData();
         document.getElementById("close-button").click();
         }
@@ -91,6 +101,7 @@ let ind;
 function editTask(index) {
   // Initialisez task form
   initTaskForm();
+  document.getElementById("update-button").disabled=false;
   // Affichez updates
   document.getElementById("update-button").classList.remove("d-none");
   // Delete Button
@@ -176,16 +187,14 @@ function initTaskForm() {
   document.getElementById("cancel-button").classList.add("d-none");
   document.getElementById("delete-button").classList.add("d-none");
   document.getElementById("update-button").classList.add("d-none");
+
+  enableADD();
 }
 
 function reloadTasks() {
   // Remove tasks elements
-  document.getElementById(
-    "to-do-tasks"
-  ).innerHTML = `<!-- TO DO TASKS HERE -->`;
-  document.getElementById(
-    "in-progress-tasks"
-  ).innerHTML = `<!-- IN PROGRESS TASKS HERE -->`;
+  document.getElementById("to-do-tasks").innerHTML = `<!-- TO DO TASKS HERE -->`;
+  document.getElementById("in-progress-tasks").innerHTML = `<!-- IN PROGRESS TASKS HERE -->`;
   document.getElementById("done-tasks").innerHTML = `<!-- DONE TASKS HERE -->`;
   // Set Task count
   let toDoCount = 0,
