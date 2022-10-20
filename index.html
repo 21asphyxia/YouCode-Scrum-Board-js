@@ -67,7 +67,7 @@
 							<h4 class="p-2 fs-6">To do (<span id="to-do-tasks-count">5</span>)</h4>
 
 						</div>
-						<div class="list-group list-group-flush" id="to-do-tasks" value='To Do'>
+						<div class="list-group list-group-flush" id="to-do-tasks" value='To Do' ondrop="dropToDo(event)" ondragover="allowDrop(event)">
 							<!-- TO DO TASKS HERE -->
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 							<h4 class="p-2 fs-6">In Progress (<span id="in-progress-tasks-count">4</span>)</h4>
 
 						</div>
-						<div class="list-group" id="in-progress-tasks" value="In Progress">
+						<div class="list-group" id="in-progress-tasks" value="In Progress" ondrop="dropInProgress(event)" ondragover="allowDrop(event)">
 							<!-- IN PROGRESS TASKS HERE -->
 						</div>
 					</div>
@@ -89,7 +89,7 @@
 							<h4 class="p-2 fs-6">Done (<span id="done-tasks-count">4</span>)</h4>
 
 						</div>
-						<div class="list-group list-group-flush" id="done-tasks" value="Done">
+						<div class="list-group list-group-flush" id="done-tasks" value="Done" ondrop="dropDone()" ondragover="allowDrop(event)">
 							<!-- DONE TASKS HERE -->
 						</div>
 					</div>
