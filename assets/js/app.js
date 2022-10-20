@@ -124,7 +124,6 @@ function editTask(index) {
   taskStatus.value = taskStatusValue;
   description.value = tasks[index].description;
   if (tasks[index].type == "Bug"){bug.checked=true}
-  console.log(bug);
   date.value = tasks[index].date;
   // Ouvrir Modal form
   $(document).ready(function () {
@@ -219,22 +218,22 @@ function reloadTasks() {
       
       icon = "bi bi-check2-circle text-success fs-3";
     }
-    
+
     document.getElementById("done-tasks-count").innerHTML = `${doneCount}`;
     document.getElementById("in-progress-tasks-count").innerHTML = `${inProgressCount}`;
     document.getElementById("to-do-tasks-count").innerHTML = `${toDoCount}`;
 
     document.querySelector('[value="' + element['status'] + '"]').innerHTML += 
         `
-        <button id="task${taskCount}" class="row list-group-item-action mx-0 border" onclick="editTask(${taskCount-1})">
+        <button id="task${taskCount}" class="row list-group-item-action mx-0 border" onclick="editTask(${taskCount-1})" draggable="true" ondragstart="drag(event)">
 								<div class="col-1 m-auto">
 									<i class="${icon}"></i> 
 								</div>
 								<div class="col-11">
 									<div class="fs-6 text-dark fw-bolder">${element['title']}</div>
 									<div class="">
-										<div class="text-secondary">#${taskCount} created in 2022-10-08</div>
-										<div class="" title="${element['description']}">${element['description']}</div>
+										<div class="text-secondary">#${taskCount} created in ${element['date']}</div>
+										<div class="text-truncate" title="${element['description']}">${element['description']}</div>
 									</div>
 									<div class="mt-1 mb-2">
 										<span class="btn-primary px-2 py-1 rounded fw-bolder" style="font-size:0.6rem">${element['priority']}</span>
@@ -244,4 +243,36 @@ function reloadTasks() {
 							</button>
         `;
   });
+}
+
+let dragId;
+
+function drag(test) {
+  dragId = (test.target.id.slice(-1)) - 1;
+  console.log(dragId);
+}
+
+function allowDrop(test) {
+  test.preventDefault();
+}
+
+function dropToDo(e){
+  e.preventDefault();
+  tasks[dragId].status = "To Do";
+  console.log(tasks[dragId].status)
+  reloadTasks();
+}
+
+function dropInProgress(e){
+  e.preventDefault();
+  tasks[dragId].status = "In Progress";
+  console.log(tasks[dragId].status)
+  reloadTasks();
+}
+
+function dropDone(e){
+  e.preventDefault();
+  tasks[dragId].status = "Done";
+  console.log(tasks[dragId].status)
+  reloadTasks();
 }
