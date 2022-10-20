@@ -4,6 +4,12 @@
  *
  */
 
+
+
+// make overflow
+// delete all or selection 
+
+
 let form = document.getElementById("form");
 let title = document.getElementById("taskTitle");
 let feature = document.getElementById("feature");
@@ -15,7 +21,6 @@ let description = document.getElementById("description");
 let toDo = document.getElementById("to-do-tasks");
 let inProgress = document.getElementById("in-progress-tasks");
 let done = document.getElementById("done-tasks");
-let taskss = document.getElementById(taskStatus);
 let add = document.getElementById("save-button");
 
 // disable save button on empty title
@@ -39,16 +44,13 @@ function createTask() {
   add.classList.remove("d-none");
   document.getElementById("cancel-button").classList.remove("d-none");
   // Ouvrir modal form
-  $(document).ready(function () {
-    $("#form").modal("show");
-  });
-  
+  $("#form").modal("show");
 }
 
 function saveTask() {
   // Recuperer task attributes a partir les champs input
     // Accepting the input
-    let acceptData = () => {
+    // let acceptData = () => {
         let taskType = null,
         taskStatusValue = null;
         if (taskStatus.value == "to-do-tasks") {
@@ -75,22 +77,22 @@ function saveTask() {
         description: description.value,
         });
         console.log(tasks);
-    };
+    // };
 
     // Empty input check
-    let formValidation = () => {
-        if (title.value === "") {
-        console.log("failure");
-        } else {
-        console.log("success");
-        add.removeAttribute("disabled")
-        acceptData();
+    // let formValidation = () => {
+    //     if (title.value === "") {
+    //     console.log("failure");
+    //     } else {
+    //     console.log("success");
+    //     add.removeAttribute("disabled")
+        // acceptData();
         document.getElementById("close-button").click();
-        }
-    };
+        // }
+    // };
 
   // running the function  
-  formValidation();
+  // formValidation();
 
   // refresh tasks
   reloadTasks();
@@ -200,6 +202,9 @@ function reloadTasks() {
     inProgressCount = 0,
     doneCount = 0,
     taskCount = 0;
+    document.getElementById("done-tasks-count").innerHTML = `${doneCount}`;
+    document.getElementById("in-progress-tasks-count").innerHTML = `${inProgressCount}`;
+    document.getElementById("to-do-tasks-count").innerHTML = `${toDoCount}`;
   tasks.forEach((element) => {
     let icon;
     
@@ -219,6 +224,7 @@ function reloadTasks() {
       icon = "bi bi-check2-circle text-success fs-3";
     }
 
+    
     document.getElementById("done-tasks-count").innerHTML = `${doneCount}`;
     document.getElementById("in-progress-tasks-count").innerHTML = `${inProgressCount}`;
     document.getElementById("to-do-tasks-count").innerHTML = `${toDoCount}`;
@@ -243,36 +249,37 @@ function reloadTasks() {
 							</button>
         `;
   });
+  
   console.log(tasks);
 }
 
 let dragId;
 
-function drag(test) {
-  dragId = (test.target.id.slice(4)) - 1;
+function drag(dragEvent) {
+  dragId = (dragEvent.target.id.slice(4)) - 1;
   console.log(dragId);
 }
 
-function allowDrop(test) {
-  test.preventDefault();
+function allowDrop(dragEvent) {
+  dragEvent.preventDefault();
 }
 
-function dropToDo(e){
-  e.preventDefault();
+function dropToDo(dragEvent){
+  dragEvent.preventDefault();
   tasks[dragId].status = "To Do";
   console.log(tasks[dragId].status)
   reloadTasks();
 }
 
-function dropInProgress(e){
-  e.preventDefault();
+function dropInProgress(dragEvent){
+  dragEvent.preventDefault();
   tasks[dragId].status = "In Progress";
   console.log(tasks[dragId].status)
   reloadTasks();
 }
 
-function dropDone(e){
-  e.preventDefault();
+function dropDone(dragEvent){
+  dragEvent.preventDefault();
   tasks[dragId].status = "Done";
   console.log(tasks[dragId].status)
   reloadTasks();
