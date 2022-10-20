@@ -243,12 +243,13 @@ function reloadTasks() {
 							</button>
         `;
   });
+  console.log(tasks);
 }
 
 let dragId;
 
 function drag(test) {
-  dragId = (test.target.id.slice(-1)) - 1;
+  dragId = (test.target.id.slice(4)) - 1;
   console.log(dragId);
 }
 
