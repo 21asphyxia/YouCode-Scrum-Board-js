@@ -182,21 +182,22 @@ function reloadTasks() {
     document.getElementById("to-do-tasks-count").innerHTML = `${toDoCount}`;
   tasks.forEach((element) => {
     let icon;
-    
+    let statusIdValue;
     if (element["status"] == "To Do") {
       taskCount++;
       toDoCount++;
       icon = "bi bi-question-circle text-success fs-4";
+      statusIdValue = "to-do-tasks";
     } else if (element["status"] == "In Progress") {
       taskCount++;
       inProgressCount++;
-      
       icon = "spinner-border spinner-border-sm text-success";
+      statusIdValue = "in-progress-tasks";
     } else if (element["status"] == "Done") {
       taskCount++;
       doneCount++;
-      
       icon = "bi bi-check2-circle text-success fs-3";
+      statusIdValue = "done-tasks";
     }
 
     
@@ -204,7 +205,7 @@ function reloadTasks() {
     document.getElementById("in-progress-tasks-count").innerHTML = `${inProgressCount}`;
     document.getElementById("to-do-tasks-count").innerHTML = `${toDoCount}`;
 
-    document.querySelector('[value="' + element['status'] + '"]').innerHTML += 
+    document.getElementById(statusIdValue).innerHTML += 
         `
         <button id="task${taskCount}" class="row list-group-item-action mx-0 border" onclick="editTask(${taskCount-1})" draggable="true" ondragstart="drag(event)">
 								<div class="col-1 m-auto">

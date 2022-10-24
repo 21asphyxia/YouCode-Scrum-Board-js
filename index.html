@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8">
 	<title>YouCode | Scrum Board</title>
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="description">
+	<meta content="" name="author">
 	
 	<!-- ================== BEGIN core-css ================== -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-	<link href="assets/css/vendor.min.css" rel="stylesheet" />
-	<link href="assets/css/default/app.min.css" rel="stylesheet" />
-	<link href="assets/css/style.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link href="assets/css/vendor.min.css" rel="stylesheet">
+	<link href="assets/css/default/app.min.css" rel="stylesheet">
+	<link href="assets/css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 	<!-- ================== END core-css ================== -->
 </head>
@@ -24,7 +24,7 @@
 						<!-- BEGIN navbar-header -->
 						<div class="navbar-header">
 							<a href="https://youcode.ma/" class="navbar-brand">
-								<img src="assets/img/logo-white.png"> 
+								<img src="assets/img/logo-white.png" alt="youcode logo"> 
 								<small >APPRENANT</small>
 							</a>
 						</div>
@@ -64,10 +64,10 @@
 				<div class="col-xl-4 col-md-6">
 					<div class="">
 						<div class="text-white bg-dark rounded-xl">
-							<h4 class="p-2 fs-6">To do (<span id="to-do-tasks-count">5</span>)</h4>
+							<h4 class="p-2 fs-6">To do (<span id="to-do-tasks-count">0</span>)</h4>
 
 						</div>
-						<div class="list-group " style="height:530px; overflow:auto" id="to-do-tasks" value='To Do' ondrop="dropToDo(event)" ondragover="allowDrop(event)">
+						<div class="list-group " style="height:530px; overflow:auto" id="to-do-tasks" ondrop="dropToDo(event)" ondragover="allowDrop(event)">
 							<!-- TO DO TASKS HERE -->
 						</div>
 					</div>
@@ -75,10 +75,10 @@
 				<div class="col-xl-4 col-md-6">
 					<div class="">
 						<div class="text-white bg-dark rounded-xl">
-							<h4 class="p-2 fs-6">In Progress (<span id="in-progress-tasks-count">4</span>)</h4>
+							<h4 class="p-2 fs-6">In Progress (<span id="in-progress-tasks-count">0</span>)</h4>
 
 						</div>
-						<div class="list-group " style="height:500px; overflow:auto;"id="in-progress-tasks" value="In Progress" ondrop="dropInProgress(event)" ondragover="allowDrop(event)">
+						<div class="list-group " style="height:500px; overflow:auto;" id="in-progress-tasks" ondrop="dropInProgress(event)" ondragover="allowDrop(event)">
 							<!-- IN PROGRESS TASKS HERE -->
 						</div>
 					</div>
@@ -86,10 +86,10 @@
 				<div class="col-xl-4 col-md-6">
 					<div class="">
 						<div class="text-white bg-dark rounded-xl">
-							<h4 class="p-2 fs-6">Done (<span id="done-tasks-count">4</span>)</h4>
+							<h4 class="p-2 fs-6">Done (<span id="done-tasks-count">0</span>)</h4>
 
 						</div>
-						<div class="list-group" style="height:530px; overflow:auto" id="done-tasks" value="Done" ondrop="dropDone(event)" ondragover="allowDrop(event)">
+						<div class="list-group" style="height:530px; overflow:auto" id="done-tasks" ondrop="dropDone(event)" ondragover="allowDrop(event)">
 							<!-- DONE TASKS HERE -->
 						</div>
 					</div>
@@ -106,7 +106,7 @@
 	<!-- END #app -->
 	
 	<!-- TASK MODAL -->
-	<form class="modal fade " id="form" tabindex="-1" aria-labelledby="exampleModalLabel"
+	<form class="modal fade " id="form" tabindex="-1"
 	aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -132,7 +132,7 @@
 						</div>
 					</div>
 					<div class="mb-3">
-						<label for="Priority" class="col-form-label">Priority</label>
+						<label class="col-form-label">Priority</label>
 						<select class="form-select" aria-label="Default select example" id="priority">
 							<option selected disabled hidden value="default">Please select</option>
 							<option value="Low">Low</option>
