@@ -4,11 +4,6 @@
  *
  */
 
-
-
-// delete all or selection 
-
-
 let form = document.getElementById("form");
 let title = document.getElementById("taskTitle");
 let feature = document.getElementById("feature");
@@ -75,24 +70,7 @@ function saveTask() {
         date: date.value,
         description: description.value,
         });
-        console.log(tasks);
-    // };
-
-    // Empty input check
-    // let formValidation = () => {
-    //     if (title.value === "") {
-    //     console.log("failure");
-    //     } else {
-    //     console.log("success");
-    //     add.removeAttribute("disabled")
-        // acceptData();
         document.getElementById("close-button").click();
-        // }
-    // };
-
-  // running the function  
-  // formValidation();
-
   // refresh tasks
   reloadTasks();
 }
@@ -130,7 +108,6 @@ function editTask(index) {
   $(document).ready(function () {
     $("#form").modal("show");
   });
-  console.log(ind);
 }
 
 function updateTask() {
@@ -159,7 +136,6 @@ function updateTask() {
     'date': date.value,
     'description': description.value,
   }
-  console.log(data);
   // Remplacer ancienne task par nouvelle task
   tasks[ind] = data;
   // Fermer Modal form
@@ -168,10 +144,10 @@ function updateTask() {
   reloadTasks();
 }
 
-function deleteTask() {
+function deleteTask(index) {
   // Get index of task in the array
   // Remove task from array by index splice function
-  tasks.splice(ind,1);
+  tasks.splice(index,1);
   // close modal form
   document.getElementById("close-button").click();
   // refresh tasks
@@ -248,15 +224,18 @@ function reloadTasks() {
 							</button>
         `;
   });
-  
-  console.log(tasks);
+
+  //delete icon
+//<span class="col-1" id="deleteIcon" onclick=deleteTask(${taskCount-1})>
+//                    <i class="bi bi-trash fs-5" ></i>
+//                  </span>
+
 }
 
 let dragId;
 
 function drag(dragEvent) {
   dragId = (dragEvent.target.id.slice(4)) - 1;
-  console.log(dragId);
 }
 
 function allowDrop(dragEvent) {
@@ -266,20 +245,18 @@ function allowDrop(dragEvent) {
 function dropToDo(dragEvent){
   dragEvent.preventDefault();
   tasks[dragId].status = "To Do";
-  console.log(tasks[dragId].status)
   reloadTasks();
 }
 
 function dropInProgress(dragEvent){
   dragEvent.preventDefault();
   tasks[dragId].status = "In Progress";
-  console.log(tasks[dragId].status)
   reloadTasks();
 }
 
 function dropDone(dragEvent){
   dragEvent.preventDefault();
   tasks[dragId].status = "Done";
-  console.log(tasks[dragId].status)
   reloadTasks();
 }
+
