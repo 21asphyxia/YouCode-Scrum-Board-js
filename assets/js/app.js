@@ -17,6 +17,9 @@ let inProgress = document.getElementById("in-progress-tasks");
 let done = document.getElementById("done-tasks");
 let add = document.getElementById("save-button");
 
+// add event listener to add task
+document.getElementById("add-button").addEventListener ("click", createTask);
+
 // disable save button on empty title
 let enableADD = () => {
   if (title.value === "") {
